@@ -37,6 +37,26 @@ public class Query {
 	
 	}
 	
+	public boolean existsBook(String isbn){
+		boolean existe = false;
+		try {
+			String query = "select count(*) from libro where isbn = '"+isbn +"';";
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()){
+				if (rs.getInt(1)==1) {
+					//System.out.println("Ya existe un libro con el isbn proporcionado");
+					existe = true;
+				}
+				
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return existe;
+	
+	} 
+	
 	public void newUser(String nombre, String apellidos, String dni, String direccion, int edad){
 		try {
 			String query = "insert into usuarios (dni, nombre, apellidos, direccion, edad) values (?,?,?,?,?);";

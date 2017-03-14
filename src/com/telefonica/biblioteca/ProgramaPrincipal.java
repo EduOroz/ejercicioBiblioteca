@@ -40,8 +40,9 @@ public class ProgramaPrincipal {
 							System.out.println("Número Páginas:");
 							num_paginas = teclado.nextInt();
 							System.out.println("Introduciendo datos....");
-							q.newBook(isbn, titulo, editorial, num_paginas, autor, año_publicacion);
-							
+							if (!q.existsBook(isbn)) {
+								q.newBook(isbn, titulo, editorial, num_paginas, autor, año_publicacion);
+							} else {System.out.println("El isbn ya existe en la biblioteca");}
 							break;
 							
 				case "2":	System.out.println("Introduce los datos del usuario a dar de alta");

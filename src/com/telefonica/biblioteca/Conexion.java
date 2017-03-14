@@ -15,7 +15,7 @@ public class Conexion {
 	public Conexion() {
 		this.bd = "biblioteca";
 		this.user = "root";
-		this.password = "941214759";
+		this.password = "";
 		this.server = "jdbc:mysql://localhost/" + bd;		//En server tenemos la ruta de nuestra BD local
 		this.con = getConexion();
 	}
