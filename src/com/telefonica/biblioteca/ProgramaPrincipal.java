@@ -78,7 +78,10 @@ public class ProgramaPrincipal {
 							dni = teclado.nextLine();
 							System.out.println("Introduce el ISBN del libro para el que desea solicitar el prestamo");
 							isbn = teclado.nextLine();
-							q.newPrestamo(dni, isbn);
+							if (q.availablePrestamo(isbn)) {
+								q.newPrestamo(dni, isbn);
+							} else {System.out.println("El libro solicitado ya se encuentra prestado en este momento");}
+							
 									
 							break;
 				

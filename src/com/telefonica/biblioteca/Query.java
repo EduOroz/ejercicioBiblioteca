@@ -95,6 +95,27 @@ public class Query {
 	
 	} 
 	
+	public boolean availablePrestamo(String isbn){
+		boolean available = true;
+		try {
+			String query = "select count(*) from prestamos where `ISBN libro` = '"+isbn +"' and `fecha recibido` is null;";
+			//System.out.println(query);
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()){
+				if (rs.getInt(1)==1) {
+					available = false;
+					//System.out.println(available);
+				}
+				
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return available;
+	
+	} 
+	
 	public void newPrestamo(String dni, String isbn){
 		
 		int id_cliente = -1;
@@ -105,12 +126,12 @@ public class Query {
 		
 		try {
 			String query = "select ID from usuarios where DNI = '" +dni +"';";
-			System.out.println(query);
+			//System.out.println(query);
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if (rs.next()){
 				id_cliente = rs.getInt(1);
-				System.out.println("El id del cliente es: " +id_cliente);
+				//System.out.println("El id del cliente es: " +id_cliente);
 			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
