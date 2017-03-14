@@ -75,6 +75,26 @@ public class Query {
 		} finally {} 
 	}
 	
+	public boolean existsUser(String dni){
+		boolean existe = false;
+		try {
+			String query = "select count(*) from usuarios where dni = '"+dni +"';";
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()){
+				if (rs.getInt(1)==1) {
+					//System.out.println("Ya existe un usuario con el dni proporcionado");
+					existe = true;
+				}
+				
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return existe;
+	
+	} 
+	
 	public void newPrestamo(String dni, String isbn){
 		
 		int id_cliente = -1;
@@ -86,7 +106,6 @@ public class Query {
 		try {
 			String query = "select ID from usuarios where DNI = '" +dni +"';";
 			System.out.println(query);
-			PreparedStatement preparedStmt = con.prepareStatement(query);
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if (rs.next()){

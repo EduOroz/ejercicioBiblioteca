@@ -7,9 +7,9 @@ public class ProgramaPrincipal {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		String opcion = "", isbn, titulo, autor, editorial, año_publicacion, nombre, apellidos, dni, direccion;
-		String c;
+		//String c;
 		int num_paginas, edad;
-		Libro biblioteca = new Libro();		//Variable para consultar todos los libros
+		//Libro biblioteca = new Libro();		//Variable para consultar todos los libros
 		Query q = new Query(new Conexion());
 		
 		while (!opcion.equals("9")){
@@ -39,10 +39,10 @@ public class ProgramaPrincipal {
 							año_publicacion = teclado.nextLine();
 							System.out.println("Número Páginas:");
 							num_paginas = teclado.nextInt();
-							System.out.println("Introduciendo datos....");
+							//System.out.println("Introduciendo datos....");
 							if (!q.existsBook(isbn)) {
 								q.newBook(isbn, titulo, editorial, num_paginas, autor, año_publicacion);
-							} else {System.out.println("El isbn ya existe en la biblioteca");}
+							} else {System.out.println("No se ha podido dar de alta, el isbn ya existe en la biblioteca");}
 							break;
 							
 				case "2":	System.out.println("Introduce los datos del usuario a dar de alta");
@@ -56,8 +56,11 @@ public class ProgramaPrincipal {
 							direccion = teclado.nextLine();
 							System.out.println("Edad:");							
 							edad = teclado.nextInt();
-							System.out.println("Introduciendo datos....");
-							q.newUser(nombre, apellidos, dni, direccion, edad);
+							//System.out.println("Introduciendo datos....");
+							if (!q.existsUser(dni)) {
+								q.newUser(nombre, apellidos, dni, direccion, edad);
+							} else {System.out.println("No se ha podido dar de alta, el usuario ya existe en la biblioteca");}
+							
 				
 							break;
 							

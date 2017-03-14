@@ -37,7 +37,7 @@ public class Conexion {
 		return conn;
 	}
 	
-	public void cerrarConexion(){
+	public void closeConexion(){
 		try {
 			con.close();
 		} catch (SQLException e) {
